@@ -1148,6 +1148,37 @@ var MathImg = /** @class */ (function () {
       */
         return sal;
     };
+    ///relacionado a proyecto final //
+    MathImg.solarizar = function (arrImage) {
+        var width = arrImage[0][0].length;
+        var height = arrImage[0].length;
+        var sal = this.initArray(width, height);
+        var umbral = 128; // Umbral para determinar qué píxeles se solarizan
+        for (var i = 0; i < height; i++) {
+            for (var j = 0; j < width; j++) {
+                // Solarizamos si el valor del píxel es menor que el umbral
+                if (arrImage[0][i][j] < umbral) {
+                    sal[0][i][j] = 255 - arrImage[0][i][j];
+                }
+                else {
+                    sal[0][i][j] = arrImage[0][i][j];
+                }
+                if (arrImage[1][i][j] < umbral) {
+                    sal[1][i][j] = 255 - arrImage[1][i][j];
+                }
+                else {
+                    sal[1][i][j] = arrImage[1][i][j];
+                }
+                if (arrImage[2][i][j] < umbral) {
+                    sal[2][i][j] = 255 - arrImage[2][i][j];
+                }
+                else {
+                    sal[2][i][j] = arrImage[2][i][j];
+                }
+            }
+        }
+        return sal;
+    };
     return MathImg;
 }());
 export { MathImg };
