@@ -423,13 +423,46 @@ function tAfin(evt: any): void{
   imagenSal.imageArray2DtoData(pantalla2, MathImg.tAfin(imagenSal, factores));
 }
 
-//inician operacion relacionadas al proyecto 
+//inician operaciones relacionadas al proyecto 
 
 function Solarizar(evt: any): void {
   var imagenSal: ImageType = new ImageType(pantalla1, imgLocal.getImage());
 
   // Aplica la función solarizar a la imagen
   imagenSal.imageArray2DtoData(pantalla2, MathImg.solarizar(imagenSal.getArrayImg()));
+}
+
+
+function Sobreexposicion(evt: any): void {
+  const imagenSal: ImageType = new ImageType(pantalla1, imgLocal.getImage());
+  imagenSal.imageArray2DtoData(pantalla2, MathImg.Sobreexposicion(imagenSal.getArrayImg()));
+}
+
+
+function ColorRosa(evt: any): void {
+  const imagenSal: ImageType = new ImageType(pantalla1, imgLocal.getImage());
+  imagenSal.imageArray2DtoData(pantalla2, MathImg.colorRosa(imagenSal.getArrayImg()));
+}
+
+function ColorPurpura(evt: any): void {
+  const imagenSal: ImageType = new ImageType(pantalla1, imgLocal.getImage());
+  imagenSal.imageArray2DtoData(pantalla2, MathImg.colorPurpura(imagenSal.getArrayImg()));
+}
+
+
+function ColorCian(evt: any): void {
+  const imagenSal: ImageType = new ImageType(pantalla1, imgLocal.getImage());
+  imagenSal.imageArray2DtoData(pantalla2, MathImg.colorCian(imagenSal.getArrayImg()));
+}
+
+function ColorAmarillo(evt: any): void {
+  const imagenSal: ImageType = new ImageType(pantalla1, imgLocal.getImage());
+  imagenSal.imageArray2DtoData(pantalla2, MathImg.colorAmarillo(imagenSal.getArrayImg()));
+}
+
+function ColorNaranja(evt: any): void {
+  const imagenSal: ImageType = new ImageType(pantalla1, imgLocal.getImage());
+  imagenSal.imageArray2DtoData(pantalla2, MathImg.colorNaranja(imagenSal.getArrayImg()));
 }
 
 lienzo1.addEventListener('mousemove', handleMouse);
@@ -511,4 +544,11 @@ document.getElementById("op-afin").addEventListener('click', tAfin, false);
 
 //operaciones proyecto 
 
+
 document.getElementById("op-Solarizar").addEventListener('click', Solarizar, false);
+document.getElementById('Sobreexposicion').addEventListener('click', Sobreexposicion);
+document.getElementById('colorRosa').addEventListener('click', ColorRosa);
+document.getElementById("colorPurpura").addEventListener('click', ColorPurpura);
+document.getElementById('colorCian').addEventListener('click', ColorCian);
+document.getElementById('colorAmarillo').addEventListener('click', ColorAmarillo);
+document.getElementById('colorNaranja').addEventListener('click', ColorNaranja);

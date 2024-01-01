@@ -1179,6 +1179,109 @@ var MathImg = /** @class */ (function () {
         }
         return sal;
     };
+    MathImg.Sobreexposicion = function (arrImage) {
+        var width = arrImage[0][0].length;
+        var height = arrImage[0].length;
+        var sal = this.initArray(width, height);
+        for (var i = 0; i < height; i++) {
+            for (var j = 0; j < width; j++) {
+                var factor = 2.8; // Puedes ajustar este valor según lo desees
+                sal[0][i][j] = arrImage[0][i][j] * factor;
+                sal[1][i][j] = arrImage[1][i][j] * factor;
+                sal[2][i][j] = arrImage[2][i][j] * factor;
+            }
+        }
+        return sal;
+    };
+    MathImg.colorRosa = function (arrImage) {
+        var width = arrImage[0][0].length;
+        var height = arrImage[0].length;
+        var sal = this.initArray(width, height);
+        var colorR = 255; // Valor R para el color rosa
+        var colorG = 182; // Valor G para el color rosa
+        var colorB = 193; // Valor B para el color rosa
+        for (var i = 0; i < height; i++) {
+            for (var j = 0; j < width; j++) {
+                // Aplica el color rosa solo a la imagen original, conserva otros detalles
+                sal[0][i][j] = (arrImage[0][i][j] + colorR) / 2;
+                sal[1][i][j] = (arrImage[1][i][j] + colorG) / 2;
+                sal[2][i][j] = (arrImage[2][i][j] + colorB) / 2;
+            }
+        }
+        return sal;
+    };
+    MathImg.colorPurpura = function (arrImage) {
+        var width = arrImage[0][0].length;
+        var height = arrImage[0].length;
+        var sal = this.initArray(width, height);
+        // Valores para un tono púrpura
+        var colorR = 128; // Valor R para el color púrpura
+        var colorG = 0; // Valor G para el color púrpura
+        var colorB = 128; // Valor B para el color púrpura
+        for (var i = 0; i < height; i++) {
+            for (var j = 0; j < width; j++) {
+                // Aplica el color púrpura solo a la imagen original, conserva otros detalles
+                sal[0][i][j] = (arrImage[0][i][j] + colorR) / 2;
+                sal[1][i][j] = (arrImage[1][i][j] + colorG) / 2;
+                sal[2][i][j] = (arrImage[2][i][j] + colorB) / 2;
+            }
+        }
+        return sal;
+    };
+    MathImg.colorCian = function (arrImage) {
+        var width = arrImage[0][0].length;
+        var height = arrImage[0].length;
+        var sal = this.initArray(width, height);
+        // Valores para un tono cian
+        var colorR = 0; // Valor R para el color cian
+        var colorG = 255; // Valor G para el color cian
+        var colorB = 255; // Valor B para el color cian
+        for (var i = 0; i < height; i++) {
+            for (var j = 0; j < width; j++) {
+                // Aplica el color cian solo a la imagen original, conserva otros detalles
+                sal[0][i][j] = (arrImage[0][i][j] + colorR) / 2;
+                sal[1][i][j] = (arrImage[1][i][j] + colorG) / 2;
+                sal[2][i][j] = (arrImage[2][i][j] + colorB) / 2;
+            }
+        }
+        return sal;
+    };
+    MathImg.colorAmarillo = function (arrImage) {
+        var width = arrImage[0][0].length;
+        var height = arrImage[0].length;
+        var sal = this.initArray(width, height);
+        // Valores para un tono amarillo
+        var colorR = 255; // Valor R para el color amarillo
+        var colorG = 255; // Valor G para el color amarillo
+        var colorB = 0; // Valor B para el color amarillo
+        for (var i = 0; i < height; i++) {
+            for (var j = 0; j < width; j++) {
+                // Aplica el color amarillo solo a la imagen original, conserva otros detalles
+                sal[0][i][j] = (arrImage[0][i][j] + colorR) / 2;
+                sal[1][i][j] = (arrImage[1][i][j] + colorG) / 2;
+                sal[2][i][j] = (arrImage[2][i][j] + colorB) / 2;
+            }
+        }
+        return sal;
+    };
+    MathImg.colorNaranja = function (arrImage) {
+        var width = arrImage[0][0].length;
+        var height = arrImage[0].length;
+        var sal = this.initArray(width, height);
+        // Valores para un tono naranja
+        var colorR = 255; // Valor R para el color naranja
+        var colorG = 100; // Valor G para el color naranja
+        var colorB = 0; // Valor B para el color naranja
+        for (var i = 0; i < height; i++) {
+            for (var j = 0; j < width; j++) {
+                // Aplica el color naranja solo a la imagen original, conserva otros detalles
+                sal[0][i][j] = (arrImage[0][i][j] + colorR) / 2;
+                sal[1][i][j] = (arrImage[1][i][j] + colorG) / 2;
+                sal[2][i][j] = (arrImage[2][i][j] + colorB) / 2;
+            }
+        }
+        return sal;
+    };
     return MathImg;
 }());
 export { MathImg };

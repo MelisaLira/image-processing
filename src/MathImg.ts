@@ -1267,4 +1267,141 @@ public static solarizar(arrImage: number[][][]): number[][][] {
 
   return sal;
 }
+
+
+public static Sobreexposicion(arrImage: number[][][]): number[][][] {
+  const width = arrImage[0][0].length;
+  const height = arrImage[0].length;
+  const sal = this.initArray(width, height);
+
+  for (let i = 0; i < height; i++) {
+      for (let j = 0; j < width; j++) {
+          const factor = 2.8; // Puedes ajustar este valor según lo desees
+          sal[0][i][j] = arrImage[0][i][j] * factor;
+          sal[1][i][j] = arrImage[1][i][j] * factor;
+          sal[2][i][j] = arrImage[2][i][j] * factor;
+      }
+  }
+
+  return sal;
+
+}
+
+
+public static colorRosa(arrImage: number[][][]): number[][][] {
+    const width = arrImage[0][0].length;
+    const height = arrImage[0].length;
+    const sal = this.initArray(width, height);
+
+    const colorR = 255; // Valor R para el color rosa
+    const colorG = 182; // Valor G para el color rosa
+    const colorB = 193; // Valor B para el color rosa
+
+    for (let i = 0; i < height; i++) {
+        for (let j = 0; j < width; j++) {
+            // Aplica el color rosa solo a la imagen original, conserva otros detalles
+            sal[0][i][j] = (arrImage[0][i][j] + colorR) / 2;
+            sal[1][i][j] = (arrImage[1][i][j] + colorG) / 2;
+            sal[2][i][j] = (arrImage[2][i][j] + colorB) / 2;
+        }
+    }
+
+    return sal;
+}
+
+public static colorPurpura(arrImage: number[][][]): number[][][] {
+  const width = arrImage[0][0].length;
+  const height = arrImage[0].length;
+  const sal = this.initArray(width, height);
+
+  // Valores para un tono púrpura
+  const colorR = 128; // Valor R para el color púrpura
+  const colorG = 0;   // Valor G para el color púrpura
+  const colorB = 128; // Valor B para el color púrpura
+
+  for (let i = 0; i < height; i++) {
+      for (let j = 0; j < width; j++) {
+          // Aplica el color púrpura solo a la imagen original, conserva otros detalles
+          sal[0][i][j] = (arrImage[0][i][j] + colorR) / 2;
+          sal[1][i][j] = (arrImage[1][i][j] + colorG) / 2;
+          sal[2][i][j] = (arrImage[2][i][j] + colorB) / 2;
+      }
+  }
+
+  return sal;
+}
+
+
+public static colorCian(arrImage: number[][][]): number[][][] {
+  const width = arrImage[0][0].length;
+  const height = arrImage[0].length;
+  const sal = this.initArray(width, height);
+
+  // Valores para un tono cian
+  const colorR = 0;   // Valor R para el color cian
+  const colorG = 255; // Valor G para el color cian
+  const colorB = 255; // Valor B para el color cian
+
+  for (let i = 0; i < height; i++) {
+      for (let j = 0; j < width; j++) {
+          // Aplica el color cian solo a la imagen original, conserva otros detalles
+          sal[0][i][j] = (arrImage[0][i][j] + colorR) / 2;
+          sal[1][i][j] = (arrImage[1][i][j] + colorG) / 2;
+          sal[2][i][j] = (arrImage[2][i][j] + colorB) / 2;
+      }
+  }
+
+  return sal;
+}
+
+public static colorAmarillo(arrImage: number[][][]): number[][][] {
+  const width = arrImage[0][0].length;
+  const height = arrImage[0].length;
+  const sal = this.initArray(width, height);
+
+  // Valores para un tono amarillo
+  const colorR = 255; // Valor R para el color amarillo
+  const colorG = 255; // Valor G para el color amarillo
+  const colorB = 0;   // Valor B para el color amarillo
+
+  for (let i = 0; i < height; i++) {
+      for (let j = 0; j < width; j++) {
+          // Aplica el color amarillo solo a la imagen original, conserva otros detalles
+          sal[0][i][j] = (arrImage[0][i][j] + colorR) / 2;
+          sal[1][i][j] = (arrImage[1][i][j] + colorG) / 2;
+          sal[2][i][j] = (arrImage[2][i][j] + colorB) / 2;
+      }
+  }
+
+  return sal;
+}
+ 
+
+public static colorNaranja(arrImage: number[][][]): number[][][] {
+  const width = arrImage[0][0].length;
+  const height = arrImage[0].length;
+  const sal = this.initArray(width, height);
+
+  // Valores para un tono naranja
+  const colorR = 255; // Valor R para el color naranja
+  const colorG = 100; // Valor G para el color naranja
+  const colorB = 0;   // Valor B para el color naranja
+
+  for (let i = 0; i < height; i++) {
+      for (let j = 0; j < width; j++) {
+          // Aplica el color naranja solo a la imagen original, conserva otros detalles
+          sal[0][i][j] = (arrImage[0][i][j] + colorR) / 2;
+          sal[1][i][j] = (arrImage[1][i][j] + colorG) / 2;
+          sal[2][i][j] = (arrImage[2][i][j] + colorB) / 2;
+      }
+  }
+
+  return sal;
+}
+
+
+
+
+
+
 }
