@@ -465,31 +465,6 @@ function ColorNaranja(evt: any): void {
   imagenSal.imageArray2DtoData(pantalla2, MathImg.colorNaranja(imagenSal.getArrayImg()));
 }
 
-function SolarizacionSepia(evt: any): void {
-  const imagenSal: ImageType = new ImageType(pantalla1, imgLocal.getImage());
-  imagenSal.imageArray2DtoData(pantalla2, MathImg.solarizarSepia(imagenSal.getArrayImg()));
-}
-
-function solarizarBlancoNegro(evt: any): void {
-  const imagenSal: ImageType = new ImageType(pantalla1, imgLocal.getImage());
-  imagenSal.imageArray2DtoData(pantalla2, MathImg.solarizarBlancoNegro(imagenSal.getArrayImg()));
-}
-
-
-function EfectoRuido(evt: any): void {
-  const intensidadString = prompt('Ingresa la intensidad del ruido VHS (entre 0 y 1):');
-
-  if (!intensidadString || isNaN(parseFloat(intensidadString)) || parseFloat(intensidadString) < 0 || parseFloat(intensidadString) > 1) {
-      alert('Ingresa una intensidad válida.');
-      return;
-  }
-
-  const intensidad = parseFloat(intensidadString);
-
-  const imagenSal: ImageType = new ImageType(pantalla1, imgLocal.getImage());
-  imagenSal.imageArray2DtoData(pantalla2, MathImg.Ruido(imagenSal.getArrayImg(), intensidad));
-}
-
 lienzo1.addEventListener('mousemove', handleMouse);
  
 lienzo1.addEventListener("mousemove", imgLocal.drawSmallImg);
@@ -571,12 +546,9 @@ document.getElementById("op-afin").addEventListener('click', tAfin, false);
 
 
 document.getElementById("op-Solarizar").addEventListener('click', Solarizar, false);
-document.getElementById("Sobreexposicion").addEventListener('click', Sobreexposicion);
-document.getElementById("colorRosa").addEventListener('click', ColorRosa);
+document.getElementById('Sobreexposicion').addEventListener('click', Sobreexposicion);
+document.getElementById('colorRosa').addEventListener('click', ColorRosa);
 document.getElementById("colorPurpura").addEventListener('click', ColorPurpura);
-document.getElementById("colorCian").addEventListener('click', ColorCian);
-document.getElementById("colorAmarillo").addEventListener('click', ColorAmarillo);
-document.getElementById("colorNaranja").addEventListener('click', ColorNaranja);
-document.getElementById("op-SolarizacionSepia").addEventListener('click', SolarizacionSepia);
-document.getElementById("op-solarizarBlancoNegro").addEventListener('click', solarizarBlancoNegro);
-document.getElementById("Ruido").addEventListener('click', EfectoRuido);
+document.getElementById('colorCian').addEventListener('click', ColorCian);
+document.getElementById('colorAmarillo').addEventListener('click', ColorAmarillo);
+document.getElementById('colorNaranja').addEventListener('click', ColorNaranja);
