@@ -397,6 +397,7 @@ function Sobreexposicion(evt) {
     var imagenSal = new ImageType(pantalla1, imgLocal.getImage());
     imagenSal.imageArray2DtoData(pantalla2, MathImg.Sobreexposicion(imagenSal.getArrayImg()));
 }
+//filtros de color
 function ColorRosa(evt) {
     var imagenSal = new ImageType(pantalla1, imgLocal.getImage());
     imagenSal.imageArray2DtoData(pantalla2, MathImg.colorRosa(imagenSal.getArrayImg()));
@@ -417,6 +418,7 @@ function ColorNaranja(evt) {
     var imagenSal = new ImageType(pantalla1, imgLocal.getImage());
     imagenSal.imageArray2DtoData(pantalla2, MathImg.colorNaranja(imagenSal.getArrayImg()));
 }
+//funciones de solarizacion
 function SolarizacionSepia(evt) {
     var imagenSal = new ImageType(pantalla1, imgLocal.getImage());
     imagenSal.imageArray2DtoData(pantalla2, MathImg.solarizarSepia(imagenSal.getArrayImg()));

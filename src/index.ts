@@ -438,6 +438,7 @@ function Sobreexposicion(evt: any): void {
   imagenSal.imageArray2DtoData(pantalla2, MathImg.Sobreexposicion(imagenSal.getArrayImg()));
 }
 
+//filtros de color
 
 function ColorRosa(evt: any): void {
   const imagenSal: ImageType = new ImageType(pantalla1, imgLocal.getImage());
@@ -465,6 +466,7 @@ function ColorNaranja(evt: any): void {
   imagenSal.imageArray2DtoData(pantalla2, MathImg.colorNaranja(imagenSal.getArrayImg()));
 }
 
+//funciones de solarizacion
 function SolarizacionSepia(evt: any): void {
   const imagenSal: ImageType = new ImageType(pantalla1, imgLocal.getImage());
   imagenSal.imageArray2DtoData(pantalla2, MathImg.solarizarSepia(imagenSal.getArrayImg()));
