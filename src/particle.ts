@@ -119,3 +119,40 @@ export class ParticleText {
   }
 
 }
+
+export class Star {
+  protected x: number;
+  protected y: number;
+  protected size: number;
+  protected ctx: CanvasRenderingContext2D;
+  protected blinkInterval: number;
+  protected blinkCounter: number;
+
+  constructor(x: number, y: number, size: number, ctx: CanvasRenderingContext2D) {
+    this.x = x;
+    this.y = y;
+    this.size = size;
+    this.ctx = ctx;
+    this.blinkInterval = Math.random() * 100 + 50; // Intervalo de parpadeo aleatorio
+    this.blinkCounter = 0;
+  }
+
+  public update() {
+    // Actualiza el contador de parpadeo
+    this.blinkCounter++;
+
+    // Cambia el tamaño de la estrella cada vez que el contador alcanza el intervalo de parpadeo
+    if (this.blinkCounter >= this.blinkInterval) {
+      this.size = Math.random() * 2 + 1; // Tamaño aleatorio
+      this.blinkCounter = 0; // Reinicia el contador
+    }
+  }
+
+  public draw() {
+    this.ctx.fillStyle = 'white';
+    this.ctx.beginPath();
+    this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    this.ctx.closePath();
+    this.ctx.fill();
+  }
+}
