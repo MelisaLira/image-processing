@@ -1282,6 +1282,63 @@ var MathImg = /** @class */ (function () {
         }
         return sal;
     };
+    MathImg.solarizarSepia = function (arrImage) {
+        var width = arrImage[0][0].length;
+        var height = arrImage[0].length;
+        var sal = this.initArray(width, height);
+        var umbral = 128; // Umbral para determinar qué píxeles se solarizan
+        for (var i = 0; i < height; i++) {
+            for (var j = 0; j < width; j++) {
+                var sepiaR = arrImage[0][i][j] * 0.393 + arrImage[1][i][j] * 0.769 + arrImage[2][i][j] * 0.189;
+                var sepiaG = arrImage[0][i][j] * 0.349 + arrImage[1][i][j] * 0.686 + arrImage[2][i][j] * 0.168;
+                var sepiaB = arrImage[0][i][j] * 0.272 + arrImage[1][i][j] * 0.534 + arrImage[2][i][j] * 0.131;
+                sal[0][i][j] = sepiaR < umbral ? sepiaR : arrImage[0][i][j];
+                sal[1][i][j] = sepiaG < umbral ? sepiaG : arrImage[1][i][j];
+                sal[2][i][j] = sepiaB < umbral ? sepiaB : arrImage[2][i][j];
+            }
+        }
+        return sal;
+    };
+    MathImg.solarizarBlancoNegro = function (arrImage) {
+        var width = arrImage[0][0].length;
+        var height = arrImage[0].length;
+        var sal = this.initArray(width, height);
+        var umbral = 128; // Umbral para determinar qué píxeles se solarizan
+        for (var i = 0; i < height; i++) {
+            for (var j = 0; j < width; j++) {
+                var promedio = (arrImage[0][i][j] + arrImage[1][i][j] + arrImage[2][i][j]) / 3;
+                sal[0][i][j] = promedio < umbral ? 255 : 0;
+                sal[1][i][j] = promedio < umbral ? 255 : 0;
+                sal[2][i][j] = promedio < umbral ? 255 : 0;
+            }
+        }
+        return sal;
+    };
+    MathImg.Ruido = function (arrImage, intensidad) {
+        var width = arrImage[0][0].length;
+        var height = arrImage[0].length;
+        var sal = this.initArray(width, height);
+        for (var i = 0; i < height; i++) {
+            for (var j = 0; j < width; j++) {
+                // Aplica el ruido solo con cierta probabilidad según la intensidad especificada
+                if (Math.random() < intensidad) {
+                    // Genera un píxel de ruido aleatorio
+                    var pixelRuido = Math.floor(Math.random() * 256);
+                    // Superpone el píxel de ruido al píxel original
+                    sal[0][i][j] = pixelRuido;
+                    sal[1][i][j] = pixelRuido;
+                    sal[2][i][j] = pixelRuido;
+                }
+                else {
+                    // Mantén el color original
+                    sal[0][i][j] = arrImage[0][i][j];
+                    sal[1][i][j] = arrImage[1][i][j];
+                    sal[2][i][j] = arrImage[2][i][j];
+                }
+            }
+        }
+        return sal;
+    };
     return MathImg;
 }());
 export { MathImg };
