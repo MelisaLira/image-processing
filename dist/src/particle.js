@@ -87,3 +87,62 @@ var ParticleText = /** @class */ (function () {
     return ParticleText;
 }());
 export { ParticleText };
+var StarRain = /** @class */ (function () {
+    function StarRain(x, y, size, ctx, color) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.ctx = ctx;
+        this.velocityY = Math.random() * 2 + 1; // Velocidad vertical aleatoria
+        this.color = color;
+    }
+    StarRain.prototype.update = function () {
+        this.y += this.velocityY;
+        // Reinicia la posición si llega al fondo del lienzo
+        if (this.y > this.ctx.canvas.height) {
+            this.y = 0;
+        }
+    };
+    StarRain.prototype.draw = function () {
+        var x = this.x;
+        var y = this.y;
+        var size = this.size;
+        var ctx = this.ctx;
+        var color = this.color;
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        for (var i = 0; i < 5; i++) {
+            var angle = (i * 2 * Math.PI) / 5 - Math.PI / 2;
+            var xPoint = x + size * Math.cos(angle);
+            var yPoint = y + size * Math.sin(angle);
+            ctx.lineTo(xPoint, yPoint);
+        }
+        ctx.closePath();
+        ctx.fill();
+    };
+    return StarRain;
+}());
+export { StarRain };
+var TetrisBlock = /** @class */ (function () {
+    function TetrisBlock(x, y, size, color) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.color = color;
+    }
+    TetrisBlock.prototype.isAtBottom = function (canvasHeight) {
+        return this.y + 1 >= canvasHeight / this.size;
+    };
+    // Método para mover el bloque hacia abajo
+    TetrisBlock.prototype.moveDown = function (speed) {
+        if (speed === void 0) { speed = 1; }
+        this.y += speed;
+    };
+    // Método para dibujar el bloque en el lienzo
+    TetrisBlock.prototype.draw = function (ctx) {
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x * this.size, this.y * this.size, this.size, this.size);
+    };
+    return TetrisBlock;
+}());
+export { TetrisBlock };

@@ -4,7 +4,10 @@ import { ImageType } from "./ImageType.js";
 import { MathImg } from "./MathImg.js";
 import { Particle } from "./particle.js";
 import { ParticleText } from "./particle.js";
+import { StarRain } from "./particle.js";
+import { TetrisBlock } from "./particle.js";
 import { CanvasLocal } from './canvasLocal.js';
+
 
 let lienzo1: HTMLCanvasElement;
 let lienzo2: HTMLCanvasElement;
@@ -216,6 +219,10 @@ const numberOfParticles = 1000;
 let particlesArray: Particle[];
 particlesArray = new Array(0);
 var imagenSal: ImageType;
+let starRainArray: StarRain[] = [];
+const numberOfStars = 100;
+let tetrisBlocks: TetrisBlock[] = [];
+
 
 function init() {
   //init
@@ -307,6 +314,78 @@ function animateParticles(){
       particleArray[i].draw();
   }
   requestAnimationFrame(animateParticles);
+}
+
+// codigo para estrellas // empieza el 4 de enero 
+
+// Función de inicialización para la lluvia 
+function initStarRain() {
+  // Inicializa las estrellas en puntos aleatorios
+  for (let i = 0; i < numberOfStars; i++) {
+    let x = Math.random() * pantalla2.canvas.width;
+    let y = Math.random() * pantalla2.canvas.height;
+    starRainArray.push(new StarRain(x, y, Math.random() * 10 + 5, ctx, 'white'));
+  }
+}
+
+function animateStarRain() {
+ 
+  ctx.drawImage(imgLocal.getImage(), 0, 0, pantalla2.canvas.width, pantalla2.canvas.height);
+
+  // Actualiza y dibuja cada estrella
+  for (let i = 0; i < starRainArray.length; i++) {
+    starRainArray[i].update();
+    starRainArray[i].draw();
+  }
+
+  
+  requestAnimationFrame(animateStarRain);
+}
+
+function LluviaEstrellas() {
+  initStarRain();
+  animateStarRain();
+}
+
+///// tetris ///
+
+function initTetris() {
+  // Crea bloques de Tetris en la parte superior del lienzo
+  for (let i = 0; i < 5; i++) {
+    tetrisBlocks.push(new TetrisBlock(i, 0, 30, 'cyan'));
+  }
+}
+
+function animateTetris() {
+  // Borra el lienzo
+  ctx.clearRect(0, 0, pantalla2.canvas.width, pantalla2.canvas.height);
+
+  // Dibuja la imagen original
+  ctx.drawImage(imgLocal.getImage(), 0, 0, pantalla2.canvas.width, pantalla2.canvas.height);
+
+  // Mueve y dibuja cada bloque
+  for (let i = 0; i < tetrisBlocks.length; i++) {
+    const block = tetrisBlocks[i];
+
+    // Verifica si el bloque ha llegado al fondo
+    if (!block.isAtBottom(pantalla2.canvas.height)) {
+      block.moveDown(0.8); 
+      block.draw(ctx);
+    } else {
+      // El bloque ha llegado al fondo, reinicia su posición y genera uno nuevo
+      block.y = 0;
+      block.x = Math.floor(Math.random() * (pantalla2.canvas.width / block.size));
+      tetrisBlocks.push(new TetrisBlock(Math.floor(Math.random() * (pantalla2.canvas.width / block.size)), 0, 30, 'cyan'));
+    }
+  }
+
+  // Llama a la animación de forma recursiva
+  requestAnimationFrame(animateTetris);
+}
+// Llamada a las funciones de inicialización y animación de Tetris
+function Tetris() {
+  initTetris();
+  animateTetris();
 }
 //seccion de histogramas  
 function histogramas(evt: any): void{
@@ -582,3 +661,5 @@ document.getElementById("colorNaranja").addEventListener('click', ColorNaranja);
 document.getElementById("op-SolarizacionSepia").addEventListener('click', SolarizacionSepia);
 document.getElementById("op-solarizarBlancoNegro").addEventListener('click', solarizarBlancoNegro);
 document.getElementById("Ruido").addEventListener('click', EfectoRuido);
+document.getElementById("LluviaEstrellas").addEventListener('click', LluviaEstrellas);
+document.getElementById('Tetris').addEventListener('click', Tetris);

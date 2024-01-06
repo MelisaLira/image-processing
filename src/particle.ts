@@ -120,39 +120,78 @@ export class ParticleText {
 
 }
 
-export class Star {
+export class StarRain {
   protected x: number;
   protected y: number;
   protected size: number;
   protected ctx: CanvasRenderingContext2D;
-  protected blinkInterval: number;
-  protected blinkCounter: number;
+  protected velocityY: number;
+  protected color: string;
 
-  constructor(x: number, y: number, size: number, ctx: CanvasRenderingContext2D) {
+  constructor(x: number, y: number, size: number, ctx: CanvasRenderingContext2D, color: string) {
     this.x = x;
     this.y = y;
     this.size = size;
     this.ctx = ctx;
-    this.blinkInterval = Math.random() * 100 + 50; // Intervalo de parpadeo aleatorio
-    this.blinkCounter = 0;
+    this.velocityY = Math.random() * 2 + 1; // Velocidad vertical aleatoria
+    this.color = color;
   }
 
   public update() {
-    // Actualiza el contador de parpadeo
-    this.blinkCounter++;
+    this.y += this.velocityY;
 
-    // Cambia el tamaño de la estrella cada vez que el contador alcanza el intervalo de parpadeo
-    if (this.blinkCounter >= this.blinkInterval) {
-      this.size = Math.random() * 2 + 1; // Tamaño aleatorio
-      this.blinkCounter = 0; // Reinicia el contador
+    // Reinicia la posición si llega al fondo del lienzo
+    if (this.y > this.ctx.canvas.height) {
+      this.y = 0;
     }
   }
 
   public draw() {
-    this.ctx.fillStyle = 'white';
-    this.ctx.beginPath();
-    this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    this.ctx.closePath();
-    this.ctx.fill();
+    const x = this.x;
+    const y = this.y;
+    const size = this.size;
+    const ctx = this.ctx;
+    const color = this.color;
+
+    ctx.fillStyle = color;
+    ctx.beginPath();
+
+    for (let i = 0; i < 5; i++) {
+      const angle = (i * 2 * Math.PI) / 5 - Math.PI / 2;
+      const xPoint = x + size * Math.cos(angle);
+      const yPoint = y + size * Math.sin(angle);
+      ctx.lineTo(xPoint, yPoint);
+    }
+
+    ctx.closePath();
+    ctx.fill();
+  }
+}
+
+export class TetrisBlock {
+  x: number;
+  y: number;
+  size: number;
+  color: string;
+
+  constructor(x: number, y: number, size: number, color: string) {
+    this.x = x;
+    this.y = y;
+    this.size = size;
+    this.color = color;
+  }
+  
+  isAtBottom(canvasHeight: number): boolean {
+    return this.y + 1 >= canvasHeight / this.size;
+  }
+  // Método para mover el bloque hacia abajo
+  moveDown(speed: number = 1) {
+    this.y += speed;
+  }
+
+  // Método para dibujar el bloque en el lienzo
+  draw(ctx: CanvasRenderingContext2D) {
+    ctx.fillStyle = this.color;
+    ctx.fillRect(this.x * this.size, this.y * this.size, this.size, this.size);
   }
 }
