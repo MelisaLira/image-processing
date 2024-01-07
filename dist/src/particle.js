@@ -146,3 +146,60 @@ var TetrisBlock = /** @class */ (function () {
     return TetrisBlock;
 }());
 export { TetrisBlock };
+var Cloud = /** @class */ (function () {
+    function Cloud(x, y, size, ctx, color, numCircles) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.ctx = ctx;
+        this.velocityX = Math.random() * 0.2 + 0.1; // Velocidad horizontal aleatoria y más lenta
+        this.color = color;
+        this.numCircles = numCircles;
+    }
+    Cloud.prototype.update = function () {
+        this.x += this.velocityX;
+        // Reinicia la posición si la nube se sale del lienzo
+        if (this.x > this.ctx.canvas.width + this.size) {
+            this.x = -this.size;
+        }
+    };
+    Cloud.prototype.draw = function () {
+        for (var i = 0; i < this.numCircles; i++) {
+            var offsetX = (Math.random() - 0.5) * this.size;
+            var offsetY = (Math.random() - 0.5) * this.size;
+            this.ctx.fillStyle = this.color;
+            this.ctx.beginPath();
+            this.ctx.arc(this.x + offsetX, this.y + offsetY, this.size / 2, 0, Math.PI * 2);
+            this.ctx.closePath();
+            this.ctx.fill();
+        }
+    };
+    return Cloud;
+}());
+export { Cloud };
+var RainFromCloud = /** @class */ (function () {
+    function RainFromCloud(x, y, length, ctx) {
+        this.x = x;
+        this.y = y;
+        this.length = length;
+        this.ctx = ctx;
+        this.velocityY = Math.random() * 5 + 2; // Velocidad vertical aleatoria
+    }
+    RainFromCloud.prototype.update = function () {
+        this.y += this.velocityY;
+        // Reinicia la posición si la gota de lluvia llega al fondo del lienzo
+        if (this.y > this.ctx.canvas.height + this.length) {
+            this.y = -this.length;
+        }
+    };
+    RainFromCloud.prototype.draw = function () {
+        this.ctx.strokeStyle = 'blue';
+        this.ctx.lineWidth = 2;
+        this.ctx.beginPath();
+        this.ctx.moveTo(this.x, this.y);
+        this.ctx.lineTo(this.x, this.y + this.length);
+        this.ctx.stroke();
+    };
+    return RainFromCloud;
+}());
+export { RainFromCloud };

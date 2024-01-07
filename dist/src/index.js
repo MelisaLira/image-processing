@@ -5,6 +5,8 @@ import { Particle } from "./particle.js";
 import { ParticleText } from "./particle.js";
 import { StarRain } from "./particle.js";
 import { TetrisBlock } from "./particle.js";
+import { Cloud } from "./particle.js";
+import { RainFromCloud } from "./particle.js";
 import { CanvasLocal } from './canvasLocal.js';
 var lienzo1;
 var lienzo2;
@@ -207,9 +209,17 @@ var numberOfParticles = 1000;
 var particlesArray;
 particlesArray = new Array(0);
 var imagenSal;
+//luvia de estrellas
 var starRainArray = [];
 var numberOfStars = 100;
+//tetris
 var tetrisBlocks = [];
+//nubes
+var cloud1;
+var cloud2;
+var cloud3;
+//lluvia con nubes
+var rainFromCloudArray;
 function init() {
     //init
     var imagenSal = new ImageType(pantalla1, imgLocal.getImage());
@@ -303,7 +313,6 @@ function initStarRain() {
 }
 function animateStarRain() {
     ctx.drawImage(imgLocal.getImage(), 0, 0, pantalla2.canvas.width, pantalla2.canvas.height);
-    // Actualiza y dibuja cada estrella
     for (var i = 0; i < starRainArray.length; i++) {
         starRainArray[i].update();
         starRainArray[i].draw();
@@ -322,9 +331,7 @@ function initTetris() {
     }
 }
 function animateTetris() {
-    // Borra el lienzo
     ctx.clearRect(0, 0, pantalla2.canvas.width, pantalla2.canvas.height);
-    // Dibuja la imagen original
     ctx.drawImage(imgLocal.getImage(), 0, 0, pantalla2.canvas.width, pantalla2.canvas.height);
     // Mueve y dibuja cada bloque
     for (var i = 0; i < tetrisBlocks.length; i++) {
@@ -341,13 +348,66 @@ function animateTetris() {
             tetrisBlocks.push(new TetrisBlock(Math.floor(Math.random() * (pantalla2.canvas.width / block.size)), 0, 30, 'cyan'));
         }
     }
-    // Llama a la animación de forma recursiva
     requestAnimationFrame(animateTetris);
 }
-// Llamada a las funciones de inicialización y animación de Tetris
 function Tetris() {
     initTetris();
     animateTetris();
+}
+// Animacion de nubes
+function initClouds() {
+    // Todas las nubes estarán en la parte superior (y = 20)
+    cloud1 = new Cloud(50, 20, 30, ctx, 'white', 15);
+    cloud2 = new Cloud(200, 20, 40, ctx, 'white', 20);
+    cloud3 = new Cloud(350, 20, 35, ctx, 'white', 18);
+}
+function animateClouds() {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.drawImage(imgLocal.getImage(), 0, 0, ctx.canvas.width, ctx.canvas.height);
+    // Actualizar y dibujar las nubes
+    cloud1.update();
+    cloud1.draw();
+    cloud2.update();
+    cloud2.draw();
+    cloud3.update();
+    cloud3.draw();
+    requestAnimationFrame(animateClouds);
+}
+function Nubes() {
+    initClouds();
+    animateClouds();
+}
+//luvia con nubes ////
+function initRainFromClouds() {
+    rainFromCloudArray = [];
+    for (var i = 0; i < 100; i++) {
+        var x = Math.random() * ctx.canvas.width;
+        var y = Math.random() * ctx.canvas.height;
+        var length_1 = Math.random() * 10 + 5;
+        rainFromCloudArray.push(new RainFromCloud(x, y, length_1, ctx));
+    }
+}
+function animateRainFromClouds() {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.drawImage(imgLocal.getImage(), 0, 0, ctx.canvas.width, ctx.canvas.height);
+    // Actualizar y dibujar las gotas de lluvia desde las nubes
+    for (var i = 0; i < rainFromCloudArray.length; i++) {
+        rainFromCloudArray[i].update();
+        rainFromCloudArray[i].draw();
+    }
+    // Actualizar y dibujar las nubes
+    cloud1.update();
+    cloud1.draw();
+    cloud2.update();
+    cloud2.draw();
+    cloud3.update();
+    cloud3.draw();
+    requestAnimationFrame(animateRainFromClouds);
+}
+function lluviaNubes() {
+    initClouds();
+    initRainFromClouds();
+    animateRainFromClouds();
 }
 //seccion de histogramas  
 function histogramas(evt) {
@@ -566,15 +626,17 @@ document.getElementById("op-shearingX").addEventListener('click', shearingX, fal
 document.getElementById("op-shearingY").addEventListener('click', shearingY, false);
 document.getElementById("op-afin").addEventListener('click', tAfin, false);
 //operaciones proyecto 
-document.getElementById("op-Solarizar").addEventListener('click', Solarizar, false);
+document.getElementById("Solarizar").addEventListener('click', Solarizar, false);
 document.getElementById("Sobreexposicion").addEventListener('click', Sobreexposicion);
 document.getElementById("colorRosa").addEventListener('click', ColorRosa);
 document.getElementById("colorPurpura").addEventListener('click', ColorPurpura);
 document.getElementById("colorCian").addEventListener('click', ColorCian);
 document.getElementById("colorAmarillo").addEventListener('click', ColorAmarillo);
 document.getElementById("colorNaranja").addEventListener('click', ColorNaranja);
-document.getElementById("op-SolarizacionSepia").addEventListener('click', SolarizacionSepia);
-document.getElementById("op-solarizarBlancoNegro").addEventListener('click', solarizarBlancoNegro);
+document.getElementById("SolarizacionSepia").addEventListener('click', SolarizacionSepia);
+document.getElementById("solarizarBlancoNegro").addEventListener('click', solarizarBlancoNegro);
 document.getElementById("Ruido").addEventListener('click', EfectoRuido);
 document.getElementById("LluviaEstrellas").addEventListener('click', LluviaEstrellas);
-document.getElementById('Tetris').addEventListener('click', Tetris);
+document.getElementById("Tetris").addEventListener('click', Tetris);
+document.getElementById("Clouds").addEventListener('click', Nubes);
+document.getElementById("lluviaNubes").addEventListener('click', lluviaNubes);

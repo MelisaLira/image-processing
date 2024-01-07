@@ -195,3 +195,82 @@ export class TetrisBlock {
     ctx.fillRect(this.x * this.size, this.y * this.size, this.size, this.size);
   }
 }
+
+
+export class Cloud {
+  protected x: number;
+  protected y: number;
+  protected size: number;
+  protected ctx: CanvasRenderingContext2D;
+  protected velocityX: number;
+  protected color: string;
+  protected numCircles: number;
+
+  constructor(x: number, y: number, size: number, ctx: CanvasRenderingContext2D, color: string, numCircles: number) {
+    this.x = x;
+    this.y = y;
+    this.size = size;
+    this.ctx = ctx;
+    this.velocityX = Math.random() * 0.2 + 0.1; // Velocidad horizontal aleatoria y más lenta
+    this.color = color;
+    this.numCircles = numCircles;
+  }
+
+  public update() {
+    this.x += this.velocityX;
+
+    // Reinicia la posición si la nube se sale del lienzo
+    if (this.x > this.ctx.canvas.width + this.size) {
+      this.x = -this.size;
+    }
+  }
+
+  public draw() {
+    for (let i = 0; i < this.numCircles; i++) {
+      const offsetX = (Math.random() - 0.5) * this.size;
+      const offsetY = (Math.random() - 0.5) * this.size;
+
+      this.ctx.fillStyle = this.color;
+      this.ctx.beginPath();
+      this.ctx.arc(this.x + offsetX, this.y + offsetY, this.size / 2, 0, Math.PI * 2);
+      this.ctx.closePath();
+      this.ctx.fill();
+    }
+  }
+}
+
+export class RainFromCloud {
+  protected x: number;
+  protected y: number;
+  protected length: number;
+  protected ctx: CanvasRenderingContext2D;
+  protected velocityY: number;
+
+  constructor(x: number, y: number, length: number, ctx: CanvasRenderingContext2D) {
+    this.x = x;
+    this.y = y;
+    this.length = length;
+    this.ctx = ctx;
+    this.velocityY = Math.random() * 5 + 2; // Velocidad vertical aleatoria
+  }
+
+  public update() {
+    this.y += this.velocityY;
+
+    // Reinicia la posición si la gota de lluvia llega al fondo del lienzo
+    if (this.y > this.ctx.canvas.height + this.length) {
+      this.y = -this.length;
+    }
+  }
+
+  public draw() {
+    this.ctx.strokeStyle = 'blue';
+    this.ctx.lineWidth = 2;
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.x, this.y);
+    this.ctx.lineTo(this.x, this.y + this.length);
+    this.ctx.stroke();
+  }
+}
+
+
