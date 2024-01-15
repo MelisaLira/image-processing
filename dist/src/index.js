@@ -551,7 +551,7 @@ function solarizarBlancoNegro(evt) {
     imagenSal.imageArray2DtoData(pantalla2, MathImg.solarizarBlancoNegro(imagenSal.getArrayImg()));
 }
 function EfectoRuido(evt) {
-    var intensidadString = prompt('Ingresa la intensidad del ruido VHS (entre 0 y 1):');
+    var intensidadString = prompt('Ingresa la intensidad del ruido (entre 0 y 1):');
     if (!intensidadString || isNaN(parseFloat(intensidadString)) || parseFloat(intensidadString) < 0 || parseFloat(intensidadString) > 1) {
         alert('Ingresa una intensidad válida.');
         return;
@@ -566,6 +566,8 @@ document.getElementById('files').addEventListener('change', imgLocal.handleFileS
 document.getElementById('files2').addEventListener('change', imgLocal4.handleFileSelect, false);
 dropZone.addEventListener('dragover', handleDragOver, false);
 dropZone.addEventListener('drop', imgLocal.handleFileSelect, false);
+/*
+
 //menu op basicas
 document.getElementById("op-gris").addEventListener('click', convertirAGris, false);
 document.getElementById("op-negativo").addEventListener('click', convertirANegativo, false);
@@ -587,6 +589,7 @@ document.getElementById("op-gradienteX").addEventListener('click', colorGradient
 document.getElementById("op-gradienteY").addEventListener('click', colorGradienteY, false);
 document.getElementById("op-contraste").addEventListener('click', opchangeContraste, false);
 document.getElementById("op-falsocolor").addEventListener('click', opchangeFalsoColor, false);
+
 //op matematicas
 document.getElementById("op-pow").addEventListener('click', opgetPow, false);
 document.getElementById("op-sqrt").addEventListener('click', sqrt, false);
@@ -597,34 +600,45 @@ document.getElementById("op-add").addEventListener('click', add, false);
 document.getElementById("op-subtract").addEventListener('click', subtract, false);
 document.getElementById("op-multiplicacion").addEventListener('click', multiplicacion, false);
 document.getElementById("op-div").addEventListener('click', div, false);
+
+
 //op con imagenes compuestas
 document.getElementById("op-addimg").addEventListener('click', sumaImg, false);
 document.getElementById("op-marca-agua-centro").addEventListener('click', marcaAguaCentro, false);
 document.getElementById("op-marca-agua-array").addEventListener('click', marcaAguaArray, false);
+
 //op con efectos
 document.getElementById("op-rain").addEventListener('click', rain, false);
 document.getElementById("op-rain2").addEventListener('click', rain2, false);
+
 //op con texto.
 document.getElementById("op-text").addEventListener('click', textEfects, false);
+
 //histogramas
 document.getElementById("op-hist").addEventListener('click', histogramas, false);
 document.getElementById("op-ecualizar").addEventListener('click', ecualizado, false);
+
+
 //mortfologia
 document.getElementById("op-eros").addEventListener('click', erosionarImg, false);
 document.getElementById("op-dila").addEventListener('click', dilatarImg, false);
 document.getElementById("op-aper").addEventListener('click', aperturaImg, false);
 document.getElementById("op-cier").addEventListener('click', cierreImg, false);
+
 //operacion con imagenes siteticas
 document.getElementById("op-pulso").addEventListener('click', generarPulso, false);
 document.getElementById("op-ruido").addEventListener('click', generarRuido, false);
 document.getElementById("op-rampax").addEventListener('click', generarRampaX, false);
 document.getElementById("op-rampay").addEventListener('click', generarRampaY, false);
+
 //operaciones geometricas
 document.getElementById("op-escalamiento").addEventListener('click', escalarImagen2, false);
 document.getElementById("op-rotacion").addEventListener('click', rotarImagen2, false);
 document.getElementById("op-shearingX").addEventListener('click', shearingX, false);
 document.getElementById("op-shearingY").addEventListener('click', shearingY, false);
 document.getElementById("op-afin").addEventListener('click', tAfin, false);
+
+*/
 //operaciones proyecto 
 document.getElementById("Solarizar").addEventListener('click', Solarizar, false);
 document.getElementById("Sobreexposicion").addEventListener('click', Sobreexposicion);

@@ -22,10 +22,10 @@ ul{
   list-style: none;
 }
 .nav li span{
-  background-color: black;
+  background-color: darkorchid;
   color: white;
   text-decoration: none;
-  padding: 10px 15px;
+  padding: 10px 65px;
   display: block;
 }
 .nav li span:hover{

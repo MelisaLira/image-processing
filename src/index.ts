@@ -640,7 +640,7 @@ function solarizarBlancoNegro(evt: any): void {
 
 
 function EfectoRuido(evt: any): void {
-  const intensidadString = prompt('Ingresa la intensidad del ruido VHS (entre 0 y 1):');
+  const intensidadString = prompt('Ingresa la intensidad del ruido (entre 0 y 1):');
 
   if (!intensidadString || isNaN(parseFloat(intensidadString)) || parseFloat(intensidadString) < 0 || parseFloat(intensidadString) > 1) {
       alert('Ingresa una intensidad válida.');
@@ -660,6 +660,9 @@ document.getElementById('files').addEventListener('change', imgLocal.handleFileS
 document.getElementById('files2').addEventListener('change', imgLocal4.handleFileSelect, false);
 dropZone.addEventListener('dragover', handleDragOver, false);
 dropZone.addEventListener('drop', imgLocal.handleFileSelect, false);
+
+/*
+
 //menu op basicas
 document.getElementById("op-gris").addEventListener('click', convertirAGris, false);
 document.getElementById("op-negativo").addEventListener('click', convertirANegativo, false);
@@ -729,6 +732,8 @@ document.getElementById("op-rotacion").addEventListener('click', rotarImagen2, f
 document.getElementById("op-shearingX").addEventListener('click', shearingX, false);
 document.getElementById("op-shearingY").addEventListener('click', shearingY, false);
 document.getElementById("op-afin").addEventListener('click', tAfin, false);
+
+*/
 
 //operaciones proyecto 
 
